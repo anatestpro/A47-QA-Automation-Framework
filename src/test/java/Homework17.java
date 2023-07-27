@@ -10,6 +10,7 @@ public class Homework17 extends BaseTest {
 
         String newSongAddedToPlaylist = "Added 1 song into";
 
+        
         navigateToPage();
         provideEmail("anastasia.dovhal@testpro.io");
         providePassword("te$t$tudent");
