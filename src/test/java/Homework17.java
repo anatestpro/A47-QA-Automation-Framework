@@ -8,7 +8,7 @@ public class Homework17 extends BaseTest {
     @Test
     public void addSongToPlaylist(){
 
-        String newSongAddedToPlaylist = "Added 1 Song into";
+        String newSongAddedToPlaylist = "Added 1 song into";
 
         navigateToPage();
         provideEmail("anastasia.dovhal@testpro.io");

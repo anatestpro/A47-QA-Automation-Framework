@@ -90,22 +90,22 @@ public class BaseTest {
         }
 
         public static void selectTheFirstSong(){
-        WebElement firstSong = driver.findElement(By.cssSelector("[class='song-item selected']>[class = 'title']"));
+        WebElement firstSong = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/div/div/div[1]/table/tr[1]/td[2]"));
         firstSong.click();
         }
 
         public static void clickAddToButton(){
-        WebElement addToButton = driver.findElement(By.cssSelector("[class='has-sub']"));
+        WebElement addToButton = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/span/button[2]"));
         addToButton.click();
         }
 
         public static void chooseZumbaPlaylist(){
-        WebElement zumbaPlaylist = driver.findElement(By.xpath("//*[@class='menu submenu menu-add-to']//li[contains (text(), 'zumba')]"));
+        WebElement zumbaPlaylist = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[1]/ul/li[6]"));
         zumbaPlaylist.click();
         }
 
         public String getNotificationText(){
-        WebElement AddingSongToPlaylistNotification = driver.findElement(By.cssSelector("[class='alertify-logs top right']"));
+        WebElement AddingSongToPlaylistNotification = driver.findElement(By.cssSelector("[class='success show]"));
         return AddingSongToPlaylistNotification.getText();
         }
         @AfterMethod
