@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -17,8 +18,14 @@ import java.time.Duration;
 
 public class BaseTest {
     public static WebDriver driver = null;
+    public static WebDriverWait wait = null;
     public static String url = null;
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
+    @BeforeSuite
+    static void setupClass(){
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
@@ -29,6 +36,8 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
         public static WebDriver pickBrowser(String browser) throws MalformedURLException {
             WebDriverManager.chromedriver().setup();
@@ -43,31 +52,33 @@ public class BaseTest {
         driver.get(url);
     }
     public void  provideEmail(String email){
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
+        //WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.clear();
+        emailField.click();
         emailField.sendKeys(email);
     }
     public void providePassword(String password){
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
     public void clickSubmit(){
-        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']")));
         submitButton.click();
     }
     public void openPlaylist(){
-        WebElement zumbaPlaylist = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
+        WebElement zumbaPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='playlists']/ul/li[3]/a")));
    zumbaPlaylist.click();
     }
     public void ClickDeletePlaylistButton(){
-        WebElement deletePlaylistButton = driver.findElement(By.cssSelector("#playlistWrapper > header > div.song-list-controls > span > button.del.btn-delete-playlist"));
+        WebElement deletePlaylistButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlistWrapper > header > div.song-list-controls > span > button.del.btn-delete-playlist")));
    deletePlaylistButton.click();
-   WebElement confirmToDeletePlaylist = driver.findElement(By.cssSelector("body > div.alertify > div > div > nav > button.ok"));
+   WebElement confirmToDeletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.alertify > div > div > nav > button.ok")));
    confirmToDeletePlaylist.click();
     }
     public String getDeletedPlaylistMsg(){
-        WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
     return notificationMsg.getText();
     }
     @AfterMethod
