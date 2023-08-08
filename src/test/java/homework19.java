@@ -17,7 +17,7 @@ public class homework19 extends BaseTest {
     public void deletePlaylist() throws InterruptedException {
         String deletedPlaylistMsg = "Deleted playlist";
 
-        launchBrowser("https://qa.koel.app/");
+        //launchBrowser("https://qa.koel.app/");
         provideEmail("anastasia.dovhal@testpro.io");
         providePassword("te$t$tudent");
         clickSubmit();

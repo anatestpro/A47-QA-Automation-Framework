@@ -12,22 +12,32 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class BaseTest {
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        threadDriver.set(pickBrowser(System.getProperty("browser", "chrome")));
 
-        ChromeDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url;
         url = BaseURL;
-        driver.get(url);
+        navigateToPage();
     }
+        public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+            WebDriverManager.chromedriver().setup();
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            return driver = new ChromeDriver(options);
+        }
+
 
     public void navigateToPage(){
         driver.get(url);
