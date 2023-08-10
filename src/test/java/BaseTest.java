@@ -1,10 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.netty.util.Timeout;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +23,8 @@ public class BaseTest {
     public static WebDriverWait wait = null;
     public static String url = null;
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    public static Actions actions = null;
+    public static String newPlaylistName = "ZUMBA";
 
     @BeforeSuite
     static void setupClass(){
@@ -38,6 +42,8 @@ public class BaseTest {
         navigateToPage();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        actions = new Actions(driver);
     }
         public static WebDriver pickBrowser(String browser) throws MalformedURLException {
             WebDriverManager.chromedriver().setup();
@@ -56,6 +62,9 @@ public class BaseTest {
         //WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.clear();
         emailField.click();
+
+        //actions.doubleClick(emailField).perform();
+        //actions.doubleClick(driver.findElement(By.cssSelector(".method"))).perform();
         emailField.sendKeys(email);
     }
     public void providePassword(String password){
@@ -71,16 +80,24 @@ public class BaseTest {
         WebElement zumbaPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='playlists']/ul/li[3]/a")));
    zumbaPlaylist.click();
     }
-    public void ClickDeletePlaylistButton(){
-        WebElement deletePlaylistButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlistWrapper > header > div.song-list-controls > span > button.del.btn-delete-playlist")));
-   deletePlaylistButton.click();
-   WebElement confirmToDeletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.alertify > div > div > nav > button.ok")));
-   confirmToDeletePlaylist.click();
+    public void  doubleClickPlaylist(){
+        WebElement annnPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > a")));
+        actions.doubleClick(annnPlaylist).perform();
     }
-    public String getDeletedPlaylistMsg(){
-        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-    return notificationMsg.getText();
+
+    public void enterNewPlaylistName(){
+        WebElement playlistNameInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        playlistNameInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        playlistNameInputField.sendKeys(newPlaylistName);
+        playlistNameInputField.sendKeys(Keys.ENTER);
     }
+
+    public boolean playlistExists(){
+       WebElement renamedPlaylistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='"+newPlaylistName+"']")));
+       return renamedPlaylistElement.isDisplayed();
+    }
+
+
     @AfterMethod
 
     public void closeBrowser(){
