@@ -13,6 +13,5 @@ public class homework21 extends BaseTest {
     enterNewPlaylistName();
     Assert.assertTrue(playlistExists());
 
-
     }
 }

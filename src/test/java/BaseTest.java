@@ -53,7 +53,6 @@ public class BaseTest {
             return driver = new ChromeDriver(options);
         }
 
-
     public void navigateToPage(){
         driver.get(url);
     }
