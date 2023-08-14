@@ -25,7 +25,7 @@ public class BaseTest {
      public static Actions actions = null;
 
 
-    @BeforeSuite
+    /* @BeforeSuite
     static void setupClass(){
         WebDriverManager.chromedriver().setup();
     }
@@ -100,5 +100,5 @@ public class BaseTest {
 
     public void closeBrowser(){
         driver.quit();
-    }
+    }*/
 }

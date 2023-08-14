@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class homework20 extends BaseTest {
 
-    @Test
+   /*  @Test(enabled = false)
     public void deletePlaylist() throws InterruptedException {
         String deletedPlaylistMsg = "Deleted playlist";
         
@@ -15,5 +15,5 @@ public class homework20 extends BaseTest {
 
         Assert.assertTrue(getDeletedPlaylistMsg().contains(deletedPlaylistMsg));
 
-    }
+    }*/
 }

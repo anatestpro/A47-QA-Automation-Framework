@@ -7,7 +7,7 @@ import org.testng.internal.BaseTestMethod;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class LoginTests extends BaseTest {
+public class LoginTests extends BasePage {
     @Test
     public void LoginValidEmailPasswordTest() {
         LoginPage loginPage = new LoginPage(driver);
@@ -20,4 +20,3 @@ public class LoginTests extends BaseTest {
 
 }
 
-}

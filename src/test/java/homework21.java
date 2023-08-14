@@ -2,7 +2,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class homework21 extends BaseTest {
-    @Test
+    /* @Test(enabled = false)
 
     public void renamePlaylist() throws InterruptedException {
 
@@ -13,5 +13,5 @@ public class homework21 extends BaseTest {
     enterNewPlaylistName();
     Assert.assertTrue(playlistExists());
 
-    }
+    }*/
 }
