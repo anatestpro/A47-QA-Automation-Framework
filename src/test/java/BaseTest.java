@@ -22,9 +22,8 @@ public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static String url = null;
-    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
-    public static Actions actions = null;
-    public static String newPlaylistName = "ZUMBA";
+     public static Actions actions = null;
+
 
     @BeforeSuite
     static void setupClass(){
