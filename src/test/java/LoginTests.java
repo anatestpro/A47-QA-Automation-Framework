@@ -3,15 +3,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
+
     @Test
-    public void LoginValidEmailPasswordTest() {
+    public void LoginValidEmailPasswordTest() throws InterruptedException {
 
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
@@ -20,15 +23,15 @@ public class LoginTests extends BaseTest {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-       String url = "https://qa.koel.app/";
-       driver.get(url);
+        String url = "https://qa.koel.app/";
+        driver.get(url);
 
-       //email and password fields
+        //email and password fields
 
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
         WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+
 
 
         emailField.click();
@@ -40,8 +43,11 @@ public class LoginTests extends BaseTest {
         passwordField.sendKeys("te$t$tudent");
 
         submitButton.click();
+        // Wait for the next page to load (you can use explicit wait here)
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
 
-        Assert.assertTrue(avatarIcon.isDisplayed());
+
 
         driver.quit();
     }
