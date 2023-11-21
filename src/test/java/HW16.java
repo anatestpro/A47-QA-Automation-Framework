@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class HW16 extends BaseTest {
+public class HW16 extends BasicTest {
 
     @Test (enabled = true)
     public void registrationNavigation(){

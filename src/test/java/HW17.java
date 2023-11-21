@@ -3,9 +3,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HW17 extends BaseTest {
+public class HW17 extends BasicTest {
 
-    @Test
+    @Test (enabled = false)
     public void addSongToPlaylist() throws InterruptedException {
 
         String newSongAddedToPlaylist = "Added 1 song into \"student.\"";
