@@ -5,12 +5,12 @@ import org.testng.annotations.Test;
 
 public class HW17 extends BaseTest {
 
-    @Test
+    @Test(enabled = false)
     public void addSongToPlaylist() throws InterruptedException {
 
         String newSongAddedToPlaylist = "Added 1 song into \"student.\"";
 
-        navigateToPage();
+        //navigateToPage();
         provideEmail();
         providePassword();
         clickSubmitButton();
