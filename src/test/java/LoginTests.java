@@ -19,10 +19,7 @@ public class LoginTests extends BaseTest {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-<<<<<<< Updated upstream
-=======
         //for opening the url in Chrome  driver.get(url)
->>>>>>> Stashed changes
         String url = "https://qa.koel.app/";
         driver.get(url);
 
