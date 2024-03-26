@@ -22,10 +22,10 @@ public class HomeWork16 extends BaseTest {
             String url = "https://qa.koel.app/";
             driver.get(url);
 
-            WebElement registrationLink = driver.findElement(By.cssSelector("[id='hel']"));
+            WebElement registrationLink = driver.findElement(By.xpath("//a[@href='registration']"));
             registrationLink.click();
 
-            WebElement registerButton = driver.findElement(By.cssSelector("[value='Register']"));
+            WebElement registerButton = driver.findElement(By.cssSelector("input#button"));
 
             Assert.assertTrue(registerButton.isDisplayed());
 

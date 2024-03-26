@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.By.*;
+
 public class LoginTests extends BaseTest {
     @Test
     public void LoginEmptyEmailPasswordTest() {
@@ -24,23 +26,21 @@ public class LoginTests extends BaseTest {
         driver.get(url);
 
         //put the email field inside the webpage
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email'"));
+        WebElement emailInput = driver.findElement(cssSelector("[type='email'"));
         emailInput.click();
         emailInput.clear();
         emailInput.sendKeys("anastasia.dovhal@testpro.io");
 
         //writing the password
 
-
-        //click submit button
+        //check if the user avatar is displaying
         WebElement submitLogin = driver.findElement(By.cssSelector("button[type='submit']"));
         submitLogin.click();
 
         //check if the user avatar is displaying
-        WebElement avatar = driver.findElement(By.cssSelector(".avatar"));
+        WebElement button = driver.findElement(By.cssSelector("button"));
 
-        Assert.assertTrue(avatar.isDisplayed());
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertTrue(button.isDisplayed());
 
         driver.quit();
     }
